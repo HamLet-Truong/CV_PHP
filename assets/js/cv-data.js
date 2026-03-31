@@ -111,6 +111,15 @@ globalThis.cvData = {
         activities: "EXPERIENCE & ACTIVITIES",
         certifications: "CERTIFICATIONS & AWARDS"
       },
+      labels: {
+        phone: "Phone",
+        email: "Email",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        major: "Major",
+        gpa: "GPA",
+        coursework: "Relevant Coursework"
+      },
       skillsTable: {
         technical: "Technical Skills",
         soft: "Soft Skills",

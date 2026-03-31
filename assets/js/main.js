@@ -6,10 +6,10 @@ function renderHeader() {
   const t = cvData.text[currentLanguage];
   document.getElementById("name").textContent = cvData.name;
   document.getElementById("role").textContent = t.role;
-  document.getElementById("phone").textContent = `Phone: ${cvData.profile.phone}`;
-  document.getElementById("email").innerHTML = `Email: <a href="mailto:${cvData.profile.email}">${cvData.profile.email}</a>`;
-  document.getElementById("github").innerHTML = `GitHub: <a href="${cvData.profile.githubUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.github}</a>`;
-  document.getElementById("linkedin").innerHTML = `LinkedIn: <a href="${cvData.profile.linkedinUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.linkedin}</a>`;
+  document.getElementById("phone").textContent = `${t.labels.phone}: ${cvData.profile.phone}`;
+  document.getElementById("email").innerHTML = `${t.labels.email}: <a href="mailto:${cvData.profile.email}">${cvData.profile.email}</a>`;
+  document.getElementById("github").innerHTML = `${t.labels.github}: <a href="${cvData.profile.githubUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.github}</a>`;
+  document.getElementById("linkedin").innerHTML = `${t.labels.linkedin}: <a href="${cvData.profile.linkedinUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.linkedin}</a>`;
   document.getElementById("address").textContent = cvData.profile.address[currentLanguage];
 }
 
@@ -74,7 +74,7 @@ function renderEducation() {
   const t = cvData.text[currentLanguage];
   const e = t.education;
 
-  document.getElementById("educationText").textContent = `${e.university} - ${e.degree}. Major: ${e.major} | ${e.expected} | GPA: ${e.gpa}. Relevant Coursework: ${e.coursework}.`;
+  document.getElementById("educationText").textContent = `${e.university} - ${e.degree}. ${t.labels.major}: ${e.major} | ${e.expected} | ${t.labels.gpa}: ${e.gpa}. ${t.labels.coursework}: ${e.coursework}.`;
 }
 
 function renderActivitiesAndCertificates() {
