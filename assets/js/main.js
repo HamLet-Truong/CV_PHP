@@ -2,56 +2,55 @@ const { cvData } = globalThis;
 
 let currentLanguage = "vi";
 
-function createList(items) {
-  return items.map((item) => `<li>${item}</li>`).join("");
+function renderHeader() {
+  const t = cvData.text[currentLanguage];
+  document.getElementById("name").textContent = cvData.name;
+  document.getElementById("role").textContent = t.role;
+  document.getElementById("phone").textContent = `Phone: ${cvData.profile.phone}`;
+  document.getElementById("email").innerHTML = `Email: <a href="mailto:${cvData.profile.email}">${cvData.profile.email}</a>`;
+  document.getElementById("github").innerHTML = `GitHub: <a href="${cvData.profile.githubUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.github}</a>`;
+  document.getElementById("linkedin").innerHTML = `LinkedIn: <a href="${cvData.profile.linkedinUrl}" target="_blank" rel="noopener noreferrer">${cvData.profile.linkedin}</a>`;
+  document.getElementById("address").textContent = cvData.profile.address[currentLanguage];
 }
 
-function renderContactInfo() {
+function renderSkillsTable() {
   const t = cvData.text[currentLanguage];
-  const contactItems = [
-    `${t.contactLabel.dob}: ${cvData.profile.dob}`,
-    `${t.contactLabel.phone}: ${cvData.profile.phone}`,
-    `${t.contactLabel.address}: ${cvData.profile.address[currentLanguage]}`,
-    `${t.contactLabel.email}: <a href="mailto:${cvData.profile.email}">${cvData.profile.email}</a>`,
-    `${t.contactLabel.github}: <a href="${cvData.profile.github}" target="_blank" rel="noopener noreferrer">${cvData.profile.github}</a>`
-  ];
+  const body = document.getElementById("skillsTableBody");
 
-  document.getElementById("contactList").innerHTML = contactItems
-    .map((item) => `<li>${item}</li>`)
-    .join("");
-}
-
-function renderEducation() {
-  const t = cvData.text[currentLanguage];
-  const education = t.education;
-
-  document.getElementById("education").innerHTML = `
-    <article class="education-card">
-      <h3>${education.school}</h3>
-      <p class="education-meta">${education.period}</p>
-      <ul class="list">
-        <li>${education.degree}</li>
-        <li>${t.labels.major}: ${education.major}</li>
-        <li>${t.labels.gpa}: ${education.gpa}</li>
-        <li>${education.courseworkLabel}: ${education.coursework.join(", ")}</li>
-      </ul>
-    </article>
+  body.innerHTML = `
+    <tr>
+      <th>${t.skillsTable.technical}</th>
+      <td>${t.skillsContent.technical}</td>
+    </tr>
+    <tr>
+      <th>${t.skillsTable.soft}</th>
+      <td>${t.skillsContent.soft}</td>
+    </tr>
+    <tr>
+      <th>${t.skillsTable.language}</th>
+      <td>${t.skillsContent.language}</td>
+    </tr>
   `;
 }
 
-function renderSkills() {
+function renderObjectivesTable() {
   const t = cvData.text[currentLanguage];
+  const body = document.getElementById("objectivesTableBody");
 
-  document.getElementById("skills").innerHTML = t.technicalSkills
-    .map(
-      (skill) => `
-      <article class="skill-item">
-        <h3>${skill.label}</h3>
-        <p>${skill.items.join(", ")}</p>
-      </article>
-    `
-    )
-    .join("");
+  body.innerHTML = `
+    <tr>
+      <th>${t.objectivesTable.short}</th>
+      <td>${t.objectivesContent.short}</td>
+    </tr>
+    <tr>
+      <th>${t.objectivesTable.mid}</th>
+      <td>${t.objectivesContent.mid}</td>
+    </tr>
+    <tr>
+      <th>${t.objectivesTable.long}</th>
+      <td>${t.objectivesContent.long}</td>
+    </tr>
+  `;
 }
 
 function renderProjects() {
@@ -61,45 +60,44 @@ function renderProjects() {
     .map(
       (project) => `
       <article class="project-card">
-        <header>
-          <h3>${project.name}</h3>
-          <p class="project-role">${project.role}</p>
-          <p class="project-stack"><strong>${t.labels.techStack}:</strong> ${project.stack}</p>
-        </header>
-        <ul class="list">${createList(project.highlights)}</ul>
+        <h3>${project.name} <span>| ${project.stack} | <em>${project.role}</em></span></h3>
+        <ul class="bullet-list">${project.highlights
+          .map((item) => `<li>${item}</li>`)
+          .join("")}</ul>
       </article>
     `
     )
     .join("");
 }
 
-function renderSimpleLists() {
+function renderEducation() {
   const t = cvData.text[currentLanguage];
+  const e = t.education;
 
-  document.getElementById("competencies").innerHTML = t.competencies
-    .map((item) => `<li>${item}</li>`)
-    .join("");
-
-  document.getElementById("additional").innerHTML = createList(
-    t.additionalInformation
-  );
+  document.getElementById("educationText").textContent = `${e.university} - ${e.degree}. Major: ${e.major} | ${e.expected} | GPA: ${e.gpa}. Relevant Coursework: ${e.coursework}.`;
 }
 
-function applyBaseContentAndLabels() {
+function renderActivitiesAndCertificates() {
   const t = cvData.text[currentLanguage];
 
-  document.getElementById("name").textContent = cvData.name;
-  document.getElementById("role").textContent = t.role;
-  document.getElementById("summary").textContent = t.summary;
-  document.getElementById("footerName").textContent = cvData.name;
-  document.getElementById("footerRole").textContent = t.footerRole;
+  document.getElementById("activitiesList").innerHTML = t.activities
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+  document.getElementById("certificationsText").textContent =
+    t.certifications.join(" | ");
+}
 
-  document.getElementById("contactTitle").textContent = t.section.contact;
-  document.getElementById("educationTitle").textContent = t.section.education;
+function applySectionLabels() {
+  const t = cvData.text[currentLanguage];
+
   document.getElementById("skillsTitle").textContent = t.section.skills;
-  document.getElementById("competenciesTitle").textContent = t.section.competencies;
-  document.getElementById("additionalTitle").textContent = t.section.additional;
+  document.getElementById("objectivesTitle").textContent = t.section.objectives;
   document.getElementById("projectsTitle").textContent = t.section.projects;
+  document.getElementById("educationTitle").textContent = t.section.education;
+  document.getElementById("activitiesTitle").textContent = t.section.activities;
+  document.getElementById("certificationsTitle").textContent =
+    t.section.certifications;
+
   document.title = t.pageTitle;
   document.documentElement.lang = currentLanguage;
 }
@@ -111,12 +109,13 @@ function updateLanguageButtons() {
 }
 
 function renderAll() {
-  applyBaseContentAndLabels();
-  renderContactInfo();
-  renderEducation();
-  renderSkills();
+  applySectionLabels();
+  renderHeader();
+  renderSkillsTable();
+  renderObjectivesTable();
   renderProjects();
-  renderSimpleLists();
+  renderEducation();
+  renderActivitiesAndCertificates();
   updateLanguageButtons();
 }
 

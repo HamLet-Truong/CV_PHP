@@ -15,66 +15,78 @@
   </head>
   <body>
     <main class="cv-sheet">
-      <header class="cv-header">
-        <img src="assets/CVProfile.jpg" alt="Profile" class="profile-pic" />
+      <div class="lang-switch" aria-label="Language switcher">
+        <button id="btnVi" class="lang-btn" type="button">VI</button>
+        <button id="btnEn" class="lang-btn" type="button">EN</button>
+      </div>
 
-        <div class="header-info">
+      <header class="cv-header">
+        <div class="identity">
           <h1 id="name">TRUONG VAN LONG</h1>
           <p id="role" class="role"></p>
+          <p class="contact-line">
+            <span id="phone"></span>
+            <span class="divider">|</span>
+            <span id="email"></span>
+          </p>
+          <p class="contact-line">
+            <span id="github"></span>
+            <span class="divider">|</span>
+            <span id="linkedin"></span>
+          </p>
+          <p id="address" class="address"></p>
         </div>
-
-        <div class="header-actions">
-          <div class="lang-switch" aria-label="Language switcher">
-            <button id="btnVi" class="lang-btn" type="button">VI</button>
-            <button id="btnEn" class="lang-btn" type="button">EN</button>
-          </div>
-        </div>
+        <figure class="photo-frame" aria-label="Candidate photo">
+          <img src="assets/CVProfile.jpg" alt="Profile" class="profile-pic" />
+          <figcaption>PHOTO</figcaption>
+        </figure>
       </header>
 
-      <p id="summary" class="summary"></p>
-
-      <section class="cv-content">
-        <aside class="left-column">
-          <section class="block" aria-labelledby="contactTitle">
-            <h2 id="contactTitle">Thông Tin Liên Hệ</h2>
-            <ul id="contactList" class="list compact"></ul>
-          </section>
-
-          <section class="block" aria-labelledby="skillsTitle">
-            <h2 id="skillsTitle">Kỹ Năng Kỹ Thuật</h2>
-            <div id="skills" class="stack"></div>
-          </section>
-
-          <section class="block" aria-labelledby="competenciesTitle">
-            <h2 id="competenciesTitle">Năng Lực Backend</h2>
-            <ul id="competencies" class="chips"></ul>
-          </section>
-
-          <section class="block" aria-labelledby="additionalTitle">
-            <h2 id="additionalTitle">Thông Tin Bổ Sung</h2>
-            <ul id="additional" class="list"></ul>
-          </section>
-        </aside>
-
-        <div class="right-column">
-          <section class="block" aria-labelledby="educationTitle">
-            <h2 id="educationTitle">Học Vấn</h2>
-            <div id="education"></div>
-          </section>
-
-          <section class="block" aria-labelledby="projectsTitle">
-            <h2 id="projectsTitle">Dự Án</h2>
-            <div id="projects" class="project-list"></div>
-          </section>
-        </div>
+      <section>
+        <h2 id="skillsTitle" class="section-title">SKILLS</h2>
+        <table class="cv-table">
+          <thead class="sr-only">
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody id="skillsTableBody"></tbody>
+        </table>
       </section>
 
-      <footer class="site-footer">
-        <p>
-          <span id="footerName"></span>
-          <span id="footerRole"></span>
-        </p>
-      </footer>
+      <section>
+        <h2 id="objectivesTitle" class="section-title">CAREER OBJECTIVE</h2>
+        <table class="cv-table">
+          <thead class="sr-only">
+            <tr>
+              <th scope="col">Timeline</th>
+              <th scope="col">Objective</th>
+            </tr>
+          </thead>
+          <tbody id="objectivesTableBody"></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="projectsTitle" class="section-title">PROJECTS</h2>
+        <div id="projects" class="project-list"></div>
+      </section>
+
+      <section>
+        <h2 id="educationTitle" class="section-title">EDUCATION</h2>
+        <p id="educationText" class="education-text"></p>
+      </section>
+
+      <section>
+        <h2 id="activitiesTitle" class="section-title">EXPERIENCE &amp; ACTIVITIES</h2>
+        <ul id="activitiesList" class="bullet-list"></ul>
+      </section>
+
+      <section>
+        <h2 id="certificationsTitle" class="section-title">CERTIFICATIONS &amp; AWARDS</h2>
+        <p id="certificationsText" class="certification-line"></p>
+      </section>
     </main>
 
     <script src="assets/js/cv-data.js"></script>
